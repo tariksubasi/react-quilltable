@@ -9,30 +9,32 @@ import "./App.css";
 Quill.register({ [`modules/${TableHandler.moduleName}`]: TableHandler }, true);
 rewirteFormats();
 
+
+const modules = {
+  toolbar: [
+    [{ header: "1" }, { header: "2" }, { font: [] }],
+    [{ size: [] }],
+    ["bold", "italic", "underline", "strike", "blockquote"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    ["link", "image", "video"],
+    ["clean"],
+    [TableHandler.toolName], // Custom table tool
+  ],
+  [`${TableHandler.moduleName}`]: {},
+  // Additional modules can be added here
+  clipboard: {
+    matchVisual: false,
+  },
+  history: {
+    delay: 2000,
+    maxStack: 500,
+    userOnly: true,
+  },
+};
+
 function App() {
   const [text, setText] = useState("");
 
-  const modules = {
-    toolbar: [
-      [{ header: "1" }, { header: "2" }, { font: [] }],
-      [{ size: [] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [{ list: "ordered" }, { list: "bullet" }],
-      ["link", "image", "video"],
-      ["clean"],
-      [TableHandler.toolName], // Custom table tool
-    ],
-    [`${TableHandler.moduleName}`]: {},
-    // Additional modules can be added here
-    clipboard: {
-      matchVisual: false,
-    },
-    history: {
-      delay: 2000,
-      maxStack: 500,
-      userOnly: true,
-    },
-  };
 
   useEffect(() => {
     const interval = setInterval(() => {
